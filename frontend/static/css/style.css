@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: "montserrat";
+}
+
+body {
+    background: #999;
+}
+
+.middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card {
+    cursor: pointer;
+    width: 340px;
+    height: 480px;
+}
+
+.front,
+.back {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    position: absolute;
+    transition: transform .6s linear;
+    transform-style: preserve-3d;
+    justify-content: center;
+    justify-items: center;
+    align-self: center;
+    align-items: center;
+}
+
+.front img {
+    height: 100%;
+}
+
+.front {
+    transform: perspective(20000px) rotateY(0deg);
+    z-index: 2;
+}
+
+.back {
+    background: #fff;
+    transform: perspective(20000px) rotateY(180deg);
+    z-index: 1;
+}
+
+.back-content {
+    transform: translateZ(40px);
+    top: 0;
+    left: 0;
+    margin-top: 34px;
+    color: #2c3e50;
+    text-align: center;
+    width: 100%;
+}
+
+.sm {
+    margin: 20px 0;
+}
+
+.sm a {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    color: #2c3e50;
+    font-size: 18px;
+    transition: 0.4s;
+    border-radius: 50%
+}
+
+.sm a:hover {
+    background: #2c3e50;
+    color: white;
+}
+
+.card:hover>.front {
+    transform: perspective(2000px) rotateY(-180deg);
+}
+
+.card:hover>.back {
+    transform: perspective(600px) rotateY(0deg);
+}
