@@ -17,8 +17,6 @@ li {
 /*------------------------ 2 Home ------------------------*/
 
 .main {
-    background: url(../images/ban.jpg) no-repeat;
-    background-size: cover;
     display: table;
     width: 100%;
     position: relative;

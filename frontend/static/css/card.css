@@ -140,19 +140,19 @@ p {
 
 /* the << >> animation */
 
-li {
+.page li {
     position: absolute;
     top: 50%;
     list-style: none;
     color: #111;
 }
 
-li:nth-child(1) {
+.page li:nth-child(1) {
     left: 15%;
     animation: simple1 1s linear infinite;
 }
 
-li:nth-child(2) {
+.page li:nth-child(2) {
     right: 15%;
     animation: simple 1s linear infinite;
 }
