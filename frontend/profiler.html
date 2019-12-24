@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/menu.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="logo float-left">
+            <a href="">MODERN</a>
+        </div>
+        <div class="nav-icon float-right">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Full Menu -->
+    <div class="full-menu">
+        <div class="fullmenu-content">
+            <ul class="page-menu">
+                <li><a class="active" href="index-2.html">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Blog Posts</a></li>
+                <li><a href="">Contact</a></li>
+                <li><a href="#">Buy Now</a></li>
+                <li class="social">
+                    <a href="#"><img src="static/images/twitter.svg" alt=""></a>
+                    <a href="#"><img src="static/images/dribbble.svg" alt=""></a>
+                    <a href="#"><img src="static/images/instagram.svg" alt=""></a>
+                    <a href="#"><img src="static/images/send.svg" alt=""></a>
+                </li>
+            </ul>
+        </div>
+        <a href="#0" class="modal-close">Close</a>
+    </div>
+    <div class="cd-transition-layer visible opening">
+        <div class="bg-layer"></div>
+    </div>
+
+    <!-- Ink Transition -->
+    <div class="wrapper">
+
+        <section class="main">
+            <div class="main-content">
+                <span class="hello">Hello Everyone!</span>
+                <h1 class="main-title">I'm Adil Ahmed and Creative<br> Interactive Developer & UX Designer.</h1>
+                <div class="social">
+                    <a href="#"><img src="static/images/twitter.svg" alt=""></a>
+                    <a href="#"><img src="static/images/instagram.svg" alt=""></a>
+                    <a href="#"><img src="static/images/dribbble.svg" alt=""></a>
+                    <a href="#"><img src="static/images/send.svg" alt=""></a>
+                </div>
+            </div>
+        </section>
+
+
+        <script src="jquery-2.1.4.min.js"></script>
+
+        <script>
+            'use strict';
+
+            $(document).ready(function() {
+
+
+
+                var width = 100,
+                    perfData = window.performance.timing,
+                    EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart),
+                    time = ((EstimatedTime / 1000) % 50) * 100
+
+
+                // Percentage Increment Animation
+                var PercentageID = $(".percentage"),
+                    start = 0,
+                    end = 100,
+                    durataion = time;
+                animateValue(PercentageID, start, end, durataion);
+
+                function animateValue(id, start, end, duration) {
+
+                    var range = end - start,
+                        current = start,
+                        increment = end > start ? 1 : -1,
+                        stepTime = Math.abs(Math.floor(duration / range)),
+                        obj = $(id);
+
+
+                    var timer = setInterval(function() {
+                        current += increment;
+                        $(obj).text(current);
+                        //obj.innerHTML = current;
+                        if (current == end) {
+                            clearInterval(timer);
+                        }
+                    }, stepTime);
+                }
+
+
+
+                setTimeout(function() {
+                    $('.preloader').fadeOut();
+
+                    $('.cd-transition-layer').addClass('closing').delay(1000).queue(function() {
+                        $(this).removeClass("visible closing opening").dequeue();
+                    });
+
+                }, time);
+
+
+
+
+                // FADE OUT EFFECT WHEN CLICK A LINK
+                $(document).on("click", "a:not(.lightbox)", function() {
+                    var newUrl = $(this).attr("href");
+                    if (!newUrl || newUrl[0] === "#") {
+                        location.hash = newUrl;
+                        return;
+                    }
+                    $("html").fadeOut(function() {
+                        location = newUrl;
+                    });
+                    return false;
+                });
+
+
+                var paget = $(".page-title .title").text();
+
+                $(".page-title").append("<span></span>");
+                $(".page-title span").append(paget);
+
+
+
+                //posts page hover 
+                $('.blog-post .blog-link').hover(function() {
+                    $(this).parent('.content-outter').parent('.blog-post').toggleClass('mousef');
+                    $(this).parent('.blog-post').toggleClass('mousef');
+                });
+
+            });
+
+
+
+
+            $(window).load(function() {
+
+
+                function smokeeffect() {
+                    var modalTrigger = $('.nav-icon'),
+                        transitionLayer = $('.cd-transition-layer'),
+                        transitionBackground = transitionLayer.children(),
+                        modalWindow = $('.full-menu');
+
+                    var frameProportion = 1.78, //png frame aspect ratio
+                        frames = 25, //number of png frames
+                        resize = false;
+
+                    //set transitionBackground dimentions
+                    setLayerDimensions();
+                    $(window).on('resize', function() {
+                        if (!resize) {
+                            resize = true;
+                            (!window.requestAnimationFrame) ? setTimeout(setLayerDimensions, 300): window.requestAnimationFrame(setLayerDimensions);
+                        }
+                    });
+
+                    //open modal window
+                    modalTrigger.on('click', function(event) {
+                        event.preventDefault();
+                        transitionLayer.addClass('visible opening');
+                        var delay = ($('.no-cssanimations').length > 0) ? 0 : 600;
+                        setTimeout(function() {
+                            modalWindow.addClass('visible');
+                        }, delay);
+                    });
+
+                    //close modal window
+                    modalWindow.on('click', '.modal-close', function(event) {
+                        event.preventDefault();
+                        transitionLayer.addClass('closing');
+                        modalWindow.removeClass('visible');
+                        transitionBackground.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {
+                            transitionLayer.removeClass('closing opening visible');
+                            transitionBackground.off('webkitAnimationEnd oanimationend msAnimationEnd animationend');
+                        });
+                    });
+
+                    function setLayerDimensions() {
+                        var windowWidth = $(window).width(),
+                            windowHeight = $(window).height(),
+                            layerHeight, layerWidth;
+
+                        if (windowWidth / windowHeight > frameProportion) {
+                            layerWidth = windowWidth;
+                            layerHeight = layerWidth / frameProportion;
+                        } else {
+                            layerHeight = windowHeight * 1.2;
+                            layerWidth = layerHeight * frameProportion;
+                        }
+
+                        transitionBackground.css({
+                            'width': layerWidth * frames + 'px',
+                            'height': layerHeight + 'px',
+                        });
+
+                        resize = false;
+                    }
+
+                }
+                smokeeffect()
+
+
+
+                /*--------------------------------------------------
+                Hero Section Height
+                ---------------------------------------------------*/
+                function homeh() {
+                    var hometext = $('.main')
+
+                    hometext.css({
+                        "height": $(window).height() + "px"
+                    });
+                }
+                homeh();
+                $(window).resize(homeh);
+
+
+                $(".page-menu li:not(.social) a, .portfolio_filter ul li a").append("<span></span>");
+
+                $('.nav-icon').on("click", function() {
+                    $(this).toggleClass('modal-close');
+                });
+
+
+
+            }); // document load end
+        </script>
+    </div>
+
+    <!-- wave section -->
+    <section>
+        <div class="wave" />>
+    </section>
+
+    <!-- profile card section -->
+    <div class="card middle">
+        <div class="front">
+            <img src="static/images/img.jpg" alt="">
+        </div>
+        <div class="back">
+            <div class="back-content middle">
+                <h2>Prateek kocher</h2>
+                <span>aka pkk</span>
+                <div class="sm">
+                    <a href="https://github.com/pkk111"><i class="fab fa-github"></i></a>
+                    <a href="https://www.facebook.com/kprateekk"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com/Prateek79144015"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/kocherprateek/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
